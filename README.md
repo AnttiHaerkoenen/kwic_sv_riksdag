@@ -1,4 +1,4 @@
-# Finnish newspapers word frequencies
+# Swedish Ståndsriksdagen (1521-1866) word frequencies
 
 ## Changelog
 

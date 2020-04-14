@@ -7,16 +7,14 @@ import pandas as pd
 VERSION = 2020.0
 data_dir = 'https://raw.githubusercontent.com/AnttiHaerkoenen/grand_duchy/master/data/processed/'
 
-freq_lemma_data = pd.read_csv(data_dir + 'frequencies_FI_newspapers_lemma.csv')
-freg_lemma_data_abs = pd.read_csv(data_dir + 'frequencies_FI_newspapers_lemma_abs.csv')
-freq_regex_data = pd.read_csv(data_dir + 'frequencies_FI_newspapers_regex.csv')
-freg_regex_data_abs = pd.read_csv(data_dir + 'frequencies_FI_newspapers_regex_abs.csv')
+freq_regex_data = pd.read_csv(data_dir + 'frequencies_riksdag_all.csv')
+freg_regex_data_abs = pd.read_csv(data_dir + 'frequencies_riksdag_all_abs.csv')
 
-keywords = set(freq_lemma_data.columns) - {'year', 'Unnamed: 0'}
+keywords = set(freq_regex_data.columns) - {'year', 'Unnamed: 0'}
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__)
-app.title = "Finnish newspapers"
+app.title = "Ståndsriksdagen (1521-1866)"
 
 application = app.server
 
@@ -48,19 +46,6 @@ app.layout = html.Div(children=[
         ),
     ]),
 
-    html.H2(children='Lemma'),
-    html.Div([
-        dcc.RadioItems(
-            id='lemma-picker',
-            options=[
-                {'label': i.capitalize(), 'value': i}
-                for i in ['lemma', 'regex']
-            ],
-            value='regex',
-            labelStyle={'display': 'inline-block'}
-        ),
-    ]),
-
     dcc.Graph(id='bar-plot'),
 
     html.P(
@@ -75,19 +60,13 @@ app.layout = html.Div(children=[
 @app.callback(
     Output('bar-plot', 'figure'),
     [Input('keyword-picker', 'value'),
-     Input('abs-picker', 'value'),
-     Input('lemma-picker', 'value')]
+     Input('abs-picker', 'value'),]
 )
 def update_graph(
         keyword,
         abs_or_rel,
-        lemma_or_regex,
 ):
-    if abs_or_rel == 'absolute' and lemma_or_regex == 'lemma':
-        data = freg_lemma_data_abs
-    elif abs_or_rel == 'relative' and lemma_or_regex == 'lemma':
-        data = freq_lemma_data
-    elif abs_or_rel == 'absolute' and lemma_or_regex == 'regex':
+    if abs_or_rel == 'absolute':
         data = freg_regex_data_abs
     else:
         data = freq_regex_data
