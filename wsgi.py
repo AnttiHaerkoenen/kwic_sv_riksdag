@@ -10,7 +10,7 @@ data_dir = 'https://raw.githubusercontent.com/AnttiHaerkoenen/grand_duchy/master
 freq_regex_data = pd.read_csv(data_dir + 'frequencies_riksdag_all.csv')
 freg_regex_data_abs = pd.read_csv(data_dir + 'frequencies_riksdag_all_abs.csv')
 
-keywords = set(freq_regex_data.columns) - {'year', 'Unnamed: 0'}
+keywords = sorted(set(freq_regex_data.columns) - {'year', 'Unnamed: 0'})
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__)
