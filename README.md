@@ -9,3 +9,7 @@ First full version
 ### 2020.1
 
 Sorted keywords
+
+### 2020.2
+
+Keywords-in-context table
