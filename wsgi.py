@@ -46,7 +46,10 @@ app.layout = html.Div(children=[
         ),
     ]),
 
-    dcc.Graph(id='bar-plot'),
+    html.Div([
+        html.H2(children='Frequency plot'),
+        dcc.Graph(id='bar-plot'),
+    ]),
 
     html.P(
         children=f"Version {VERSION}",
