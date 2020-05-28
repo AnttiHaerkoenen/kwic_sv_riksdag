@@ -34,6 +34,10 @@ First full version
 
 Sorted keywords
 
-#### 2020.1.1
+### 2020.2
+
+Datatable
+
+#### 2020.2.1
 
 Tweaks
