@@ -85,7 +85,9 @@ app.layout = html.Div(children=[
 
     html.Div([
         html.H2(children='Frequency plot'),
-        dcc.Graph(id='bar-plot'),
+        dcc.Graph(
+            id='bar-plot',
+        ),
     ]),
 
     html.Div([
@@ -157,7 +159,7 @@ def update_graph(
             'y': y,
             'type': 'bar',
             'name': keyword,
-        }]
+        }],
     }
 
 
